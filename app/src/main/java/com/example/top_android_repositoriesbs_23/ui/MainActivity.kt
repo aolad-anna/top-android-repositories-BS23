@@ -1,4 +1,4 @@
-package com.example.top_android_repositoriesbs_23
+package com.example.top_android_repositoriesbs_23.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.top_android_repositoriesbs_23.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

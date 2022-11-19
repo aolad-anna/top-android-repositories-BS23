@@ -24,7 +24,7 @@ data class Repository(
 data class Owner(
     @Json(name = "avatar_url")
     val avatar: String?,
-//    val name: String?,
+    val name: String?,
     val login: String?,
     val email: String?,
 )
