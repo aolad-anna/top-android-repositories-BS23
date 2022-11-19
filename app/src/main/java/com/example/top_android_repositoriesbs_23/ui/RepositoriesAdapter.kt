@@ -1,16 +1,20 @@
 package com.example.top_android_repositoriesbs_23.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.top_android_repositoriesbs_23.R
 import com.example.top_android_repositoriesbs_23.network.Repository
+import com.example.top_android_repositoriesbs_23.network.SearchRepositoriesResponse
 
 class RepositoriesAdapter: ListAdapter<Repository, RepositoriesAdapter.ViewHolder>(DiffCallback) {
 
@@ -29,6 +33,7 @@ class RepositoriesAdapter: ListAdapter<Repository, RepositoriesAdapter.ViewHolde
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val avatarImageView: ImageView = itemView.findViewById(R.id.userAvatar)
         val ropoNameTextView: TextView = itemView.findViewById(R.id.repoName)
+        val ropoDecTextView: TextView = itemView.findViewById(R.id.repoDec)
         val userNameTextView: TextView = itemView.findViewById(R.id.userName)
     }
 
@@ -43,11 +48,13 @@ class RepositoriesAdapter: ListAdapter<Repository, RepositoriesAdapter.ViewHolde
     /**
      * Replace the contents of a view (invoked by the layout manager)
      */
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = currentList[position]
         holder.avatarImageView.load(item.owner.avatar)
         holder.ropoNameTextView.text = item.name
-        holder.userNameTextView.text = item.owner.login
+        holder.ropoDecTextView.text = item.description
+        holder.userNameTextView.text ="@${item.owner.login}"
         holder.itemView.setOnClickListener {
             onItemClicked(currentList[position])
         }

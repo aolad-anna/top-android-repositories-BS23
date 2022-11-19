@@ -1,12 +1,14 @@
 package com.example.top_android_repositoriesbs_23.ui
 
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.top_android_repositoriesbs_23.R
 import com.example.top_android_repositoriesbs_23.network.Repository
 import com.example.top_android_repositoriesbs_23.network.RepositoryApi
-
+import com.example.top_android_repositoriesbs_23.network.SearchRepositoriesResponse
 import kotlinx.coroutines.launch
 
 
@@ -24,7 +26,7 @@ class RepositoryViewModel : ViewModel() {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
-                _repositories.value = RepositoryApi.retrofitService.searchRepositories(query, 20, 1).items
+                _repositories.value = RepositoryApi.retrofitService.searchRepositories(query, 40).items
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
