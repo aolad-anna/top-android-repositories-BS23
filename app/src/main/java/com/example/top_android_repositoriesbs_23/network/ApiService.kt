@@ -23,7 +23,9 @@ interface ApiService {
     suspend fun searchRepositories(
         @Query("q") query: String,
         @Query("per_page") perPage: Int,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("sort") sort: String,
+        @Query("order") order: String
     ): SearchRepositoriesResponse
 }
 

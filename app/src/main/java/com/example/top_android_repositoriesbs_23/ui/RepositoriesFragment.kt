@@ -24,6 +24,8 @@ class RepositoriesFragment() : Fragment() {
     var scrollOutItems:Int = 0
     var pageNumber :Int= 1
     var qry = ""
+    var sort: String = ""
+    var order: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +66,7 @@ class RepositoriesFragment() : Fragment() {
                         isScrolling = false
 
                         pageNumber++
-                        viewModel.searchRepositories(qry ,pageNumber)
+                        viewModel.searchRepositories(qry ,pageNumber, sort, order)
                     }
                 }
             }
@@ -97,11 +99,9 @@ class RepositoriesFragment() : Fragment() {
                 popup.setOnMenuItemClickListener(object : MenuItem.OnMenuItemClickListener,
                     PopupMenu.OnMenuItemClickListener {
                     override fun onMenuItemClick(item: MenuItem): Boolean {
-                        Toast.makeText(
-                            requireContext(),
-                            "You Clicked : " + item.title,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        sort = item.title.toString()
+                        order = item.title.toString()
+                        viewModel.searchRepositories(qry ?: "",1, sort, order)
                         return true
                     }
                 })
@@ -119,7 +119,7 @@ class RepositoriesFragment() : Fragment() {
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 qry= query.toString()
-                viewModel.searchRepositories(query ?: "",1)
+                viewModel.searchRepositories(query ?: "",1, sort, order)
                 return true
             }
 

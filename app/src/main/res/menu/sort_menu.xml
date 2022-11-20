@@ -1,8 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
-        android:id="@+id/star"
-        android:title="Star"/>
+        android:id="@+id/stars"
+        android:title="stars"/>
     <item
-        android:id="@+id/lastUpdated"
-        android:title="Last updated"/>
+        android:id="@+id/asce"
+        android:title="asce"/>
 </menu>
