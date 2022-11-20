@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:textColor="#4C4747"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:drawableEndCompat="@drawable/ic_search"
             app:drawableStartCompat="@drawable/ic_eye"

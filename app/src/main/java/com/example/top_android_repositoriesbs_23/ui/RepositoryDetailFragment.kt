@@ -55,6 +55,7 @@ class RepositoryDetailFragment : Fragment() {
             val newDate: Date = date?.let { it1 -> spf.parse(it1) } as Date
             spf = SimpleDateFormat("dd MMM yyyy")
             val newDateString: String = spf.format(newDate)
+
             updatedTextView.text = "Last Update: $newDateString"
         }
     }

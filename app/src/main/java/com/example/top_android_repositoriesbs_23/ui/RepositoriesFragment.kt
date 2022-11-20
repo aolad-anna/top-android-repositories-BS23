@@ -3,9 +3,7 @@ package com.example.top_android_repositoriesbs_23.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.AbsListView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -35,7 +33,7 @@ class RepositoriesFragment() : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_repositories, container, false)
     }
@@ -58,10 +56,10 @@ class RepositoriesFragment() : Fragment() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                currentItems = recyclerView.layoutManager!!.getChildCount()
-                totalItems = recyclerView.layoutManager!!.getItemCount()
+                currentItems = recyclerView.layoutManager!!.childCount
+                totalItems = recyclerView.layoutManager!!.itemCount
                 scrollOutItems = (recyclerView.layoutManager!! as LinearLayoutManager).findFirstVisibleItemPosition()
-                if (isScrolling && currentItems + scrollOutItems === totalItems) {
+                if (isScrolling && currentItems + scrollOutItems == totalItems) {
                     if (isScrollingAPi) {
                         isScrolling = false
 
@@ -90,11 +88,30 @@ class RepositoriesFragment() : Fragment() {
             viewModel.selectedRepository = it
             findNavController().navigate(R.id.action_repositoriesFragment_to_repositoryDetailFragment)
         }
+
+        val sortBtn = view.findViewById(R.id.sortBtn) as ImageView
+        sortBtn.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val popup = PopupMenu(requireContext(), sortBtn)
+                popup.menuInflater.inflate(R.menu.sort_menu, popup.menu)
+                popup.setOnMenuItemClickListener(object : MenuItem.OnMenuItemClickListener,
+                    PopupMenu.OnMenuItemClickListener {
+                    override fun onMenuItemClick(item: MenuItem): Boolean {
+                        Toast.makeText(
+                            requireContext(),
+                            "You Clicked : " + item.title,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return true
+                    }
+                })
+                popup.show()
+            }
+        })
     }
 
     @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.options_menu, menu)
         val searchItem = menu.findItem(R.id.actionSearch)
         val searchView = searchItem.actionView as? SearchView

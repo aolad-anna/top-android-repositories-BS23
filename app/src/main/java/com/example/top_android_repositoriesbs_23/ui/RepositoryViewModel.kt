@@ -5,10 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.top_android_repositoriesbs_23.R
 import com.example.top_android_repositoriesbs_23.network.Repository
 import com.example.top_android_repositoriesbs_23.network.RepositoryApi
-import com.example.top_android_repositoriesbs_23.network.SearchRepositoriesResponse
 import kotlinx.coroutines.launch
 
 
