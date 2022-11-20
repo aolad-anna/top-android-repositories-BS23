@@ -3,21 +3,28 @@ package com.example.top_android_repositoriesbs_23.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.AbsListView
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.top_android_repositoriesbs_23.R
-import com.example.top_android_repositoriesbs_23.network.SearchRepositoriesResponse
+
 
 class RepositoriesFragment() : Fragment() {
 
     private val viewModel: RepositoryViewModel by activityViewModels()
+    var isScrolling = false
+    var isScrollingAPi = true
+    var currentItems = 0
+    var totalItems:Int = 0
+    var scrollOutItems:Int = 0
+    var pageNumber :Int= 1
+    var qry = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +44,32 @@ class RepositoriesFragment() : Fragment() {
         val recyclerView: RecyclerView = view.findViewById(R.id.repositoriesRecyclerView)
         val adapter = RepositoriesAdapter()
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScrolling = true
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                currentItems = recyclerView.layoutManager!!.getChildCount()
+                totalItems = recyclerView.layoutManager!!.getItemCount()
+                scrollOutItems = (recyclerView.layoutManager!! as LinearLayoutManager).findFirstVisibleItemPosition()
+                if (isScrolling && currentItems + scrollOutItems === totalItems) {
+                    if (isScrollingAPi) {
+                        isScrolling = false
+
+                        pageNumber++
+                        viewModel.searchRepositories(qry ,pageNumber)
+                    }
+                }
+            }
+        })
 
         viewModel.repositories.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -62,7 +95,8 @@ class RepositoriesFragment() : Fragment() {
         searchView?.queryHint = "Search Repository 'Android'"
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                viewModel.searchRepositories(query ?: "")
+                qry= query.toString()
+                viewModel.searchRepositories(query ?: "",1)
                 return true
             }
 

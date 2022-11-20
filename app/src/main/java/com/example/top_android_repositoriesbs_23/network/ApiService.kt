@@ -9,7 +9,6 @@ import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.github.com/"
 
-
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
@@ -23,7 +22,8 @@ interface ApiService {
     @GET("search/repositories")
     suspend fun searchRepositories(
         @Query("q") query: String,
-        @Query("per_page") perPage: Int
+        @Query("per_page") perPage: Int,
+        @Query("page") page: Int
     ): SearchRepositoriesResponse
 }
 

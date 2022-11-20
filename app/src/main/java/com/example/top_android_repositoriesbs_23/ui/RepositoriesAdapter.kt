@@ -36,18 +36,11 @@ class RepositoriesAdapter: ListAdapter<Repository, RepositoriesAdapter.ViewHolde
         val ropoDecTextView: TextView = itemView.findViewById(R.id.repoDec)
         val userNameTextView: TextView = itemView.findViewById(R.id.userName)
     }
-
-    /**
-     * Create new views (invoked by the layout manager)
-     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.repository_recyclerview_item, parent, false)
         return ViewHolder(view)
     }
 
-    /**
-     * Replace the contents of a view (invoked by the layout manager)
-     */
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = currentList[position]

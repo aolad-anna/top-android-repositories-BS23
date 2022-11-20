@@ -22,11 +22,11 @@ class RepositoryViewModel : ViewModel() {
     private val _repositories = MutableLiveData<List<Repository>>()
     val repositories: LiveData<List<Repository>> = _repositories
 
-    fun searchRepositories(query: String) {
+    fun searchRepositories(query: String,pages: Int) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
-                _repositories.value = RepositoryApi.retrofitService.searchRepositories(query, 40).items
+                _repositories.value = RepositoryApi.retrofitService.searchRepositories(query, 10, pages).items
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
