@@ -16,6 +16,8 @@ data class Repository(
     val name: String?,
     val forks: Int?,
     val language: String?,
+    val watchers: String?,
+    val updated_at: String?,
     @Json(name = "default_branch")
     val defaultBranch: String?,
     val owner: Owner,

@@ -10,5 +10,16 @@
         android:name="com.example.top_android_repositoriesbs_23.ui.RepositoriesFragment"
         android:label="Top Android Repositories"
         tools:layout="@layout/fragment_repositories" >
-            </fragment>
+        <action
+            android:id="@+id/action_repositoriesFragment_to_repositoryDetailFragment"
+            app:destination="@id/repositoryDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/repositoryDetailFragment"
+        android:name="com.example.top_android_repositoriesbs_23.ui.RepositoryDetailFragment"
+        android:label="Repository Details"
+        tools:layout="@layout/fragment_repository_detail" >
+
+    </fragment>
     </navigation>

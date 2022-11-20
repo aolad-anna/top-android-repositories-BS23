@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.top_android_repositoriesbs_23.R
@@ -83,6 +84,11 @@ class RepositoriesFragment() : Fragment() {
             progressBar.visibility = if (it == ApiStatus.LOADING) View.VISIBLE else View.GONE
             constraintLayout.visibility = if (it == ApiStatus.DONE) View.VISIBLE else View.GONE
             errorView.visibility = if (it == ApiStatus.ERROR) View.VISIBLE else View.GONE
+        }
+
+        adapter.onItemClicked = {
+            viewModel.selectedRepository = it
+            findNavController().navigate(R.id.action_repositoriesFragment_to_repositoryDetailFragment)
         }
     }
 
