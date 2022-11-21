@@ -64,7 +64,6 @@ class RepositoriesFragment() : Fragment() {
                 if (isScrolling && currentItems + scrollOutItems == totalItems) {
                     if (isScrollingAPi) {
                         isScrolling = false
-
                         pageNumber++
                         viewModel.searchRepositories(qry ,pageNumber, sort, order)
                     }
@@ -78,11 +77,13 @@ class RepositoriesFragment() : Fragment() {
 
         val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
         val constraintLayout: ConstraintLayout = view.findViewById(R.id.constraintLayout)
+        val linearLayout: LinearLayout = view.findViewById(R.id.mainView)
         val totalCount: TextView = view.findViewById(R.id.countData)
         val errorView: View = view.findViewById(R.id.errorView)
         viewModel.status.observe(viewLifecycleOwner) {
             progressBar.visibility = if (it == ApiStatus.LOADING) View.VISIBLE else View.GONE
-            constraintLayout.visibility = if (it == ApiStatus.DONE) View.VISIBLE else View.GONE
+            constraintLayout.visibility = if (it == ApiStatus.DONE || it == ApiStatus.LOADING) View.VISIBLE else View.GONE
+            linearLayout.visibility = if (it == ApiStatus.DONE) View.GONE else View.GONE
             errorView.visibility = if (it == ApiStatus.ERROR) View.VISIBLE else View.GONE
         }
 

@@ -4,5 +4,8 @@
         android:title="stars"/>
     <item
         android:id="@+id/asce"
-        android:title="asce"/>
+        android:title="updated"/>
+    <item
+        android:id="@+id/helpWantedIssues"
+        android:title="help-wanted-issues"/>
 </menu>
