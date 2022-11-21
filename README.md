@@ -1,8 +1,8 @@
 # top-android-repositories-BS23
 
 Tasks
-•	Fetch repository list from GitHub API using "Android" as query keyword. (API doc). 
-•	The fetched data should be stored in a local database to permit the app to be used offline mode. 
+•	Fetch repository list from GitHub API using "Android" as query keyword. (API doc). <br>
+•	The fetched data should be stored in a local database to permit the app to be used offline mode. <br>
 •	Fetching the repository list should be paginated by scrolling. Each time by scrolling, fetch 10 new items. 
 •	The required data can be refreshed from the API no more frequently than once every 30 minutes. 
 •	Show the list of repositories in the home page. 
