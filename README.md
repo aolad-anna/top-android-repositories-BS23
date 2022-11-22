@@ -21,4 +21,8 @@ screenshots<br>
 
 ![Downloads2](https://user-images.githubusercontent.com/32567035/203127798-054abef0-a5c9-4ac7-8cfc-3ed4a4543ec8.jpg)
 
+Screen Record<br>
+
+https://user-images.githubusercontent.com/32567035/203251569-ba3f641a-4930-4d53-b3d9-8a92157c5cbb.mp4
+
 
